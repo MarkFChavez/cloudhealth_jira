@@ -1,5 +1,2 @@
-%div
-  - @issues.each do |issue|
-    %p 
-      #{issue.key} #{issue.summary}
-    %p #{issue.customfield_10007}
+- @issues.each do |issue|
+  %p #{issue[:name]} - #{issue[:total]}
