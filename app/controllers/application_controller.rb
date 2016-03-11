@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from JIRA::OauthClient::UninitializedAccessTokenError do
-    redurect_to new_jira_session_url
+    render text: "token error" and return
   end
+
+  rescue from Net::OpenTimeout do
+    render text: "timeout" and return
+  end
+
 
   private
 

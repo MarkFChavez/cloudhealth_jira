@@ -1,2 +1,5 @@
+%h1 For Sprint #{params[:sprint]}
+%hr
+
 - @issues.each do |issue|
-  %p #{issue[:name]} - #{issue[:total]}
+  %p #{issue[:name]} - #{pluralize(issue[:total], "point")}

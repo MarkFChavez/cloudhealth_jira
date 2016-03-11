@@ -4,7 +4,7 @@ class CloudhealthController < ApplicationController
   def index
     render text: "no sprint specified" and return unless params[:sprint]
     
-    @issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 500)
+    @issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 1_000_000)
 
     @issues = @issues.select do |issue|
       sprint = issue.customfield_10007
@@ -16,7 +16,11 @@ class CloudhealthController < ApplicationController
     end.select { |k, v| k.present? }
 
     @issues = @issues.map do |username, issues|
-      { name: username, total: issues.count }
+      story_points = issues.sum do |issue|
+        issue.customfield_10004 || 0
+      end
+
+      { name: username, total: story_points }
     end.sort_by { |hash| hash[:total] }.reverse
   end
 end
