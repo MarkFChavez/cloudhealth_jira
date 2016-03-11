@@ -4,7 +4,7 @@ class CloudhealthController < ApplicationController
   def index
     render text: "no sprint specified" and return unless params[:sprint]
     
-    @issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 1_000_000)
+    @issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 500_000)
 
     @issues = @issues.select do |issue|
       sprint = issue.customfield_10007
