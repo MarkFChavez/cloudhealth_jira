@@ -17,3 +17,5 @@
 
 rsacert.pem
 rsakey.pem
+
+config/secrets.yml
