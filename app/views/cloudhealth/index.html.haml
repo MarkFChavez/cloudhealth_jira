@@ -1,5 +1,8 @@
-%h1 For Sprint #{params[:sprint]}
-%hr
+%h1.center-align
+  #{params[:sprint]}
 
-- @issues.each do |issue|
-  %p #{issue[:name]} - #{pluralize(issue[:total], "point")}
+.center-align
+  = pie_chart @issues, @opts
+
+-# - @issues.each do |issue|
+-#   %p #{issue[:name]} - #{pluralize(issue[:total], "point")}

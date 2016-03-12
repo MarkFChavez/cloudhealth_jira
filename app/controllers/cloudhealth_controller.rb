@@ -3,8 +3,15 @@ class CloudhealthController < ApplicationController
   
   def index
     render "no_sprint_found" and return unless params[:sprint]
-    
-    @issues = fetch_data
+
+    @issues = pie_chart.build
+    @opts = pie_chart.options
+  end
+
+  private
+
+  def pie_chart
+    Chart::Pie.new(fetch_data, self)
   end
 
   def fetch_data
