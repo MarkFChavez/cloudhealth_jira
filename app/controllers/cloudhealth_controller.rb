@@ -2,7 +2,7 @@ class CloudhealthController < ApplicationController
   before_action :get_jira_client
   
   def index
-    render text: "no sprint specified" and return unless params[:sprint]
+    render "no_sprint_found" and return unless params[:sprint]
     
     @issues = fetch_data
   end

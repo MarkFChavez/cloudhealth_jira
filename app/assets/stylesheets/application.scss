@@ -1,0 +1,31 @@
+@import "materialize/components/color";
+$primary-color: color("blue", "lighten-2") !default;
+@import "materialize";
+
+* {
+  font-weight: 100 !important;
+}
+
+.f-30 {
+  font-size: 30px !important;
+}
+
+.top30 {
+  margin-top: 30px !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+::-webkit-input-placeholder { 
+  font-weight: 100;
+}
+
+:-moz-placeholder { 
+  font-weight: 100;
+}
+
+::-moz-placeholder { 
+  font-weight: 100;
+}
