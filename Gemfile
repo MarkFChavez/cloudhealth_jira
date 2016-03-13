@@ -10,7 +10,6 @@ gem 'jira-ruby', :require => 'jira'
 gem 'haml'
 gem 'haml-rails'
 gem 'materialize-sass'
-gem 'chartjs-ror'
 
 group :development do
   gem 'pry'

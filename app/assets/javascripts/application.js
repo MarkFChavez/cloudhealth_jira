@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require materialize-sprockets
-//= require Chart
-//= require excanvas
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
