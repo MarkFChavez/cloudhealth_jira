@@ -1,8 +1,17 @@
-%h1.center-align
-  #{params[:sprint]}
+.row
+  .col.l12
+    %h3.center-align
+      %span Cloudhealth #{params[:sprint]}
+    %hr
 
-.center-align
-  = pie_chart @issues, @opts
+.row
+  .col.l8.offset-l2
+    - @members.each do |member|
+      .row
+        .col.l9
+          %h5.user-name
+            = image_tag member.avatar, class: "circle"
+            = member.display_name
+        .col.l3
+          %h5= pluralize(member.story_points, "point")
 
--# - @issues.each do |issue|
--#   %p #{issue[:name]} - #{pluralize(issue[:total], "point")}

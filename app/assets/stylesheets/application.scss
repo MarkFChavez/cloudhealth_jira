@@ -29,3 +29,7 @@ $primary-color: color("blue", "lighten-2") !default;
 ::-moz-placeholder { 
   font-weight: 100;
 }
+
+.user-block {
+  padding: 5px;
+}

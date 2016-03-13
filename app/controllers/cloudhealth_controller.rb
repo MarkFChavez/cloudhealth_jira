@@ -2,19 +2,17 @@ class CloudhealthController < ApplicationController
   before_action :get_jira_client
   
   def index
-    render "no_sprint_found" and return unless params[:sprint]
+    render "no_sprint_found" and return unless (params[:sprint] and params[:sprint].present?)
 
-    @issues = pie_chart.build
-    @opts = pie_chart.options
+    @members = MemberFactory.build(members)
+    @members = @members.sort_by do |member|
+      member.story_points
+    end.reverse
   end
 
   private
 
-  def pie_chart
-    Chart::Pie.new(fetch_data, self)
-  end
-
-  def fetch_data
+  def members
     issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 500_000)
 
     issues = issues.select do |issue|
@@ -23,16 +21,8 @@ class CloudhealthController < ApplicationController
     end
   
     issues = issues.group_by do |issue|
-      issue.assignee.try(:name)
+      issue.assignee.try(:displayName)
     end.select { |k, v| k.present? }
-
-    issues = issues.map do |username, issues|
-      story_points = issues.sum do |issue|
-        issue.customfield_10004 || 0
-      end
-
-      { name: username, total: story_points }
-    end.sort_by { |hash| hash[:total] }.reverse
 
     issues
   end
