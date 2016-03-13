@@ -6,8 +6,14 @@ class Member
     @issues = issues
   end
 
-  def story_points
-    issues.sum do |issue|
+  def issues_done
+    issues.select do |issue|
+      issue.fields["status"]["statusCategory"]["name"] == "Done" rescue false
+    end
+  end
+
+  def points_done
+    issues_done.sum do |issue|
       issue.customfield_10004 || 0
     end
   end

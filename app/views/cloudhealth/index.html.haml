@@ -2,6 +2,11 @@
   .col.l12
     %h3.center-align
       %span Cloudhealth #{params[:sprint]}
+    .right 
+      = link_to "check another sprint", root_path
+
+    %div{ style: "clear:both" }
+
     %hr
 
 .row
@@ -13,5 +18,6 @@
             = image_tag member.avatar, class: "circle"
             = member.display_name
         .col.l3
-          %h5= pluralize(member.story_points, "point")
+          %h5
+            #{pluralize(member.points_done, "point")}
 

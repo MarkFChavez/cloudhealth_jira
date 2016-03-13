@@ -6,14 +6,14 @@ class CloudhealthController < ApplicationController
 
     @members = MemberFactory.build(members)
     @members = @members.sort_by do |member|
-      member.story_points
+      member.points_done
     end.reverse
   end
 
   private
 
   def members
-    issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 500_000)
+    issues = @jira_client.Issue.jql("PROJECT = REL", max_results: 10_000_000)
 
     issues = issues.select do |issue|
       sprint = issue.customfield_10007
