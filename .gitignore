@@ -15,7 +15,4 @@
 /log/*.log
 /tmp
 
-rsacert.pem
-rsakey.pem
-
 config/secrets.yml
